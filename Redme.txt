@@ -1,0 +1,94 @@
+For this project we used MySQL Database and kafka for message broker.
+
+
+How to run the Application.
+
+1.) Run Kafka on Local for Windows
+ a. Navigate to the directory where the Kafka package is located and open CMD inside the Kafka folder. 
+ b. Run Zookeeper with the following command: [zookeeper-server-start.bat config\zookeeper.properties]
+ c. Run the Kafka server with the following command: [bin\windows\kafka-server-start.bat config\server.properties]
+ 
+
+2.)Configure application.properties File
+
+a.Locate the application.properties file inside the src/main/resources directory of your project.
+b.Update the necessary configurations as required.
+
+
+spring.application.name=Assigment2
+
+# MySQL Configuration
+# Provide the database URL with the database name
+spring.datasource.url=jdbc:mysql://localhost:3306/local_test_db2
+# Provide the username of the database
+spring.datasource.username=root
+# Provide the password of the database
+spring.datasource.password=Saqeeb123
+# Tells Hibernate to automatically update the database schema when the application starts.
+spring.jpa.hibernate.ddl-auto=update
+
+# Kafka Configuration
+# Provide the Kafka cluster or Kafka server URL and port
+spring.kafka.bootstrap-servers=localhost:9092
+# Identifies the Kafka consumer group.
+spring.kafka.consumer.group-id=group_id
+# Configures how Kafka handles the initial reading of messages. 
+spring.kafka.consumer.auto-offset-reset=latest
+
+3.) Logback.xml Path Setup
+a. Locate the logback.xml file inside the src/main/resources directory of your project.
+b. Change the path where you wish to save log files by updating the path inside the <file> element.
+
+
+API Specification for Product Management and for testing
+
+
+1.) Create Product
+
+Description: Creates a new product.
+
+Method/ ENDPOINT :POST /products   
+URL : http://localhost:8080/products
+
+
+Request Body
+
+{
+    "name": "Mac Book6",
+    "description": "Apple Mackbook Pro6",
+    "price": 1007777.99,
+    "quantity": 100
+}
+
+
+2.) Get Product by ID
+
+Description: Retrieves a product by its ID.
+
+Method/Endpoint: GET /products/{id}
+
+URL : http://localhost:8080/products/6
+
+3.) Update Product
+
+Description: Updates an existing product.
+
+Method/Endpoint: PUT /products/{id}
+
+URL : http://localhost:8080/products/5
+
+Request Body
+
+{
+    "name": "Updated Product Name",
+    "description": "Updated Description",
+    "price": 39.99,
+    "quantity": 80
+}
+
+4.) Delete Product
+
+Description: Deletes a product by its ID.
+
+Method/Endpoint: DELETE /products/{id}
+URL : http://localhost:8080/products/5
